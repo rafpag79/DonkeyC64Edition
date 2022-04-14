@@ -1,0 +1,12 @@
+parsing
+flex pass 1
+  // sta $0400
+  lda #$10 * i
+  cmp FrameCounter
+  bne !roadSpeedMatchNo-
+      ^
+
+Error: relative address is illegal (jump distance is too far).
+at line 229, column 7 in DonkeyC64.asm
+
+
