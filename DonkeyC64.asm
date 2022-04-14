@@ -125,7 +125,6 @@ Entry: // $080e
 	
 	jsr Map.Draw
 
-
 	// *** Init *** //
 	jsr Cow.Init
 
@@ -143,7 +142,6 @@ gameLoop:
 		jsr Cow.Draw
 		jsr Car.Draw
 
-		//jsr Keyboard.KeyReset
 		inc FrameCounter
 		jmp gameLoop
 		rts
@@ -192,18 +190,29 @@ Keyboard: {
 		sta KeyCaptured
 
 		// *** Store Array *** //
-		//.break
-		inc KeyCapturedIndex
+				
 		ldx KeyCapturedIndex
-		sta KeyCapturedArray, x
-		cpx #$10
+		sta KeyCapturedArray, x		
+		cpx #$20
 		beq !resetIndex+
 		bne !exit+
-	!resetIndex:	
+	!resetIndex:
 		ldx #$00
 		stx KeyCapturedIndex		
+	//.break
+		ldx #$00
+	!resetArray:		
+		lda #$00
+		sta KeyCapturedArray, x
+		
+		cpx #$20
+		inx
+		bne !resetArray-
+
 		rts
+
 	!exit:
+		inc KeyCapturedIndex
 		rts
 	}
 
@@ -218,32 +227,68 @@ Road: {
 		// .byte $00,$20,$40,$60,$80,$a0,$c0
 		//         0,  1   2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15
 		// .byte $00,$10,$20,$30,$40,$50,$60,$70,$80,$90,$a0,$b0,$c0,$d0,$e0,$f0
+	/*.for(var i=0;i<8;i++) {		
+		lda #$20 * i
+		cmp FrameCounter	
+		beq !uguale+
+		rts
+	!uguale:
+		jmp roadSpeedMatchYes		
+	}*/
 
-	.for(var i=0;i<16;i++) {
-		// lda #i
-		// sta $0400
-		lda #$10 * i
-		cmp FrameCounter
-		// bne !roadSpeedMatchNo-
-		beq !roadSpeedMatchYes+
-	}		
-	!roadSpeedMatchNo:
-		rts	
-	!roadSpeedMatchYes:
-		// *** If Pari o Dispari Then Goto *** //
-	 // .break
+	lda #$00
+	cmp FrameCounter
+	beq roadSpeedMatchYes
+	
+	lda #$20
+	cmp FrameCounter
+	beq roadSpeedMatchYes
+	
+	lda #$40 
+	cmp FrameCounter
+	beq roadSpeedMatchYes
+	
+	lda #$60 
+	cmp FrameCounter
+	beq roadSpeedMatchYes
+
+	lda #$80 
+	cmp FrameCounter
+	beq roadSpeedMatchYes
+
+	lda #$a0 
+	cmp FrameCounter
+	beq roadSpeedMatchYes
+
+	lda #$c0 
+	cmp FrameCounter
+	beq roadSpeedMatchYes
+
+	lda #$e0 
+	cmp FrameCounter
+	beq roadSpeedMatchYes
+
+!exit:
+	rts
+		
+roadSpeedMatchYes:	
+	 .break
+		// *** If Pari o Dispari Then Goto *** //	 
 		lda RoadPariOrDispari 
 		cmp #ROAD_PARI
-		beq !rowEven+		
+		beq !rowPari+
+
+		lda RoadPariOrDispari 
 		cmp #ROAD_DISPARI
-		beq !rowOdd+
+		beq !rowDispari+
+
 		rts
 		
-	!rowEven:
+	!rowPari:
 		lda #ROAD_DISPARI
 		sta RoadPariOrDispari 
 		rts
-	!rowOdd:
+	!rowDispari:
 		lda #ROAD_PARI
 		sta RoadPariOrDispari 
 		rts
@@ -252,17 +297,18 @@ Road: {
 
 	Draw: {
 		// *** If Pari o Dispari Then Goto *** //
-	 // .break
 		lda RoadPariOrDispari 
 		cmp #ROAD_PARI
-		beq !rowEven+		
+		beq !rowEven+
+		
+		lda RoadPariOrDispari		
 		cmp #ROAD_DISPARI
 		beq !rowOdd+
+		
 		rts	
 
 	!rowEven:		
-		// lda #ROAD_DISPARI
-		// sta RoadPariOrDispari 
+		.break
 		// Pari: Pieno
 		lda #$04
 		sta SCREEN_RAM + 0 * SCREEN_ROW_LENGTH + $13 //1
@@ -295,8 +341,7 @@ Road: {
 		rts
 
 	!rowOdd:		
-		// lda #ROAD_PARI
-		// sta RoadPariOrDispari 
+		.break
 		// Pari: Niente
 		lda #$00
 		sta SCREEN_RAM + 0 * SCREEN_ROW_LENGTH + $13 //1
@@ -366,15 +411,30 @@ Car: {
 	Update: {
 		// *** Change Lane *** //
 		 
-		 lda KeyCaptured
-		 cmp #%10111111
-		 beq !change+
-		 rts
+			ldx #$00
+		!next:
+			lda KeyCapturedArray, x
+			cmp #%10111111
+			beq !trovato+
+
+			cpx #$20			
+			beq !exit+
+
+			dex
+			jmp !next-
+		!trovato:
+			// jsr Keyboard.Reset
+			jmp !change+
+		!exit:
+			 // lda KeyCaptured
+			 // cmp #%10111111
+			 // beq !change+
+			rts
 
 		!change:
 			// Reset FrameKey
-			lda $00
-			sta FrameKey
+			// lda $00
+			// sta FrameKey
 
 			lda CarLane
 			cmp #CAR_LANE_LEFT
@@ -610,7 +670,8 @@ KeyCapturedIndex:
 	.byte $00
 KeyCapturedArray:
 		//  1   2   3   4   5   6   7   8   9  10
-	.byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	//.byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	.fill 32, $00
 KeyCaptured:
 	.byte $00
 FrameKey:
@@ -631,6 +692,7 @@ RoadSpeedArray:
    //      0    1    2   3   4    5    6
  // .byte   0,  32,  64,  96, 128, 160, 192 
 	.byte $00, $20, $40, $60, $80, $a0, $c0
+	//.fill 64, $00
 RoadSpeedArraySize:
 	.byte $07
 RoadSpeedArrayIndexFound:
@@ -648,7 +710,7 @@ SPRITES: {
 	// .import binary "./sprites.bin"
 	//16*4=64 $40
 	SpriteCar0:	
-		.byte $00,$00,$07,$00, $00,$0f,$00,$00,$0f,$00,$00,$0f,$00,$00,$1f,$00
+		.byte $00,$00,$07,$00,$00,$0f,$00,$00,$0f,$00,$00,$0f,$00,$00,$1f,$00
 		.byte $00,$1f,$00,$00,$1f,$00,$00,$1f,$00,$07,$1f,$00,$07,$1f,$00,$07
 		.byte $7f,$00,$07,$7f,$00,$07,$7f,$00,$07,$1f,$00,$07,$1f,$00,$00,$1f
 		.byte $00,$00,$1f,$00,$00,$1c,$00,$00,$1b,$00,$00,$17,$00,$00,$17,$01
