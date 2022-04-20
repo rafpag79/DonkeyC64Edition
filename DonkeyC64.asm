@@ -63,6 +63,15 @@
 .label KEYBOARD_DDR_PORT_A_COL = $dc03
 .label KEYBOARD_BUFFER_BEGIN = $277
 .label KEYBOARD_BUFFER_END = $280
+// *** Window *** //
+.label SPEED_WINDOW_1_B = $00 //0
+.label SPEED_WINDOW_1_E = $20 //32
+.label SPEED_WINDOW_2_B = $21
+.label SPEED_WINDOW_2_E = $40
+.label SPEED_WINDOW_3_B = $80
+.label SPEED_WINDOW_3_E = $80
+// Sound
+.label S = 54272
 
 // *=$0801
 BasicUpstart2(Entry)
@@ -126,12 +135,16 @@ Entry: // $080e
 	
 	jsr Map.Init
 
+	// jsr Sound.Reset
+	// jsr Sound.Init
+
 	// *** Init *** //
 	jsr Cow.Init
 
 gameLoop:
 		jsr WaitRaster		
 		jsr Keyboard.KeyScan
+		jsr Speed.WhatWindow
 
 		// *** Update *** //
 		jsr Road.Update
@@ -143,6 +156,8 @@ gameLoop:
 		jsr Cow.Draw
 		jsr Car.Draw
 
+		// jsr Sound.Reset
+		// jsr Sound.Play
 		inc FrameCounter
 		jmp gameLoop
 	!returnBasic:
@@ -169,20 +184,26 @@ ClearScreen: {
         rts
 }
 
+#import "./Speed.asm"
 #import "./keyboard.asm"
 #import "./cow.asm"
 #import "./road.asm"
 #import "./car.asm"
 #import "./levelZero.asm"
+// #import "./sound.asm"
 
-KeyCapturedIndexEnd:
-	.byte $00
+// KeyCapturedCurIndex:
+	// .byte $00
 KeyCapturedArray:
 		//  1   2   3   4   5   6   7   8   9  10
 	//.byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 	.fill 255, $00
-// KeyCaptured:
-	// .byte $00
+CurWindow:
+	.byte $00
+CurWindowBegin:
+	.byte $00
+CurWindowEnd:
+	.byte $00
 FrameKey:
 	.byte $00
 FrameCounter:

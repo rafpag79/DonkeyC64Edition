@@ -2,23 +2,35 @@ Car: {
 	
 	Update: {
 		// *** Change Lane *** //
-			lda FrameCounter
-			sbc #$20
-			sta KeyCapturedIndexEnd
-		 
-			ldx FrameCounter
-		!next:
-			lda KeyCapturedArray, x
-			cmp #%10111111
-			beq !trovato+
+			// ldx FrameCounter
+			// cpx #$00
 
-			cpx KeyCapturedIndexEnd		
-			beq !exit+
+			// sbc #$20
+			// sta KeyCapturedIndexEnd
 
-			dex
-			jmp !next-
-		!trovato:
-			jmp !change+
+		
+		ldx CurWindow
+		cpx #$01
+		beq !window1+
+
+	!window1:
+
+
+		
+		
+			// ldx FrameCounter
+		// !next:
+			// lda KeyCapturedArray, x
+			// cmp #%10111111
+			// beq !trovato+
+
+			// cpx KeyCapturedIndexEnd		
+			// beq !exit+
+
+			// dex
+			// jmp !next-
+		// !trovato:
+			// jmp !change+
 		!exit:
 			rts
 
