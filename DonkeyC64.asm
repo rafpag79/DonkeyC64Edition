@@ -144,7 +144,7 @@ Entry: // $080e
 gameLoop:
 		jsr WaitRaster		
 		jsr Keyboard.KeyScan
-		jsr Speed.WhatWindow
+		//jsr Speed.WhatWindow
 
 		// *** Update *** //
 		jsr Road.Update

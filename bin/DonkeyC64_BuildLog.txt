@@ -1,14 +1,16 @@
 parsing
 flex pass 1
 flex pass 2
-  beq !window5+  // A=B
+flex pass 3
+Output pass
+Writing prg file: C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition\bin\DonkeyC64.prg
 
-  cpx #$c0  // A
-  beq !window6+
-      ^
+Memory Map
+----------
+Default-segment:
+  $0801-$080c Basic
+  $080e-$149b Basic End
+  $3000-$37f7 CharSet
 
-Error: relative address is illegal (jump distance is too far).
-at line 61, column 7 in Speed.asm
-called at line 187, column 9 in DonkeyC64.asm
-
-
+Writing Vice symbol file: C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition\bin\DonkeyC64.vs
+Writing Symbol file: DonkeyC64.sym

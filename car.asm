@@ -9,28 +9,33 @@ Car: {
 			// sta KeyCapturedIndexEnd
 
 		
-		ldx CurWindow
-		cpx #$01
-		beq !window1+
+		// ldx CurWindowBegin
+		// cpx #$01
+		// beq !window1+
 
-	!window1:
+		// *** Speed *** //
+		jsr Speed.WhatWindow2
 
 
-		
-		
-			// ldx FrameCounter
-		// !next:
-			// lda KeyCapturedArray, x
-			// cmp #%10111111
-			// beq !trovato+
 
-			// cpx KeyCapturedIndexEnd		
-			// beq !exit+
+	
+			ldx CurWindowBegin
+		!next:
+		// .break
+			lda KeyCapturedArray, x
+			cmp #%10111111
+			beq !trovato+
 
-			// dex
-			// jmp !next-
-		// !trovato:
-			// jmp !change+
+			cpx CurWindowBegin		
+			beq !exit+
+
+			inx
+			jmp !next-
+		!trovato:
+		// .break
+			lda #$00 //delete key from array
+			sta KeyCapturedArray, x
+			jmp !change+
 		!exit:
 			rts
 
