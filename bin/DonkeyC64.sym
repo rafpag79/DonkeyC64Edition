@@ -9,13 +9,13 @@
 .label SPRITE_5_COLOR=$d02c
 .label ROAD_POSITION_RIGHT=$b8
 .label SPRITE_5_POSITION_RIGHT_X_ENABLE=$d015
-.label RoadSpeedArrayIndexFound=$ebf
+.label RoadSpeedArrayIndexFound=$ceb
 .label SPRITE_3_PTR_VAL=$f3
 .label SPRITE_MC_MODE_ENABLE=$d01c
 .label KEYBOARD_BUFFER_END=$280
 .label SPRITE_1_PTR_VAL=$f1
 .label SPRITE_1_POSITION_Y=$d003
-.label FrameKey=$eb2
+.label FrameKey=$cdd
 .label SPRITE_2_POSITION_RIGHT_X_ENABLE=$d012
 .label KEYBOARD_DDR_PORT_A_ROW=$dc02
 .label SPRITE_PTR_BASE=$3c00
@@ -24,24 +24,25 @@
 .label SPRITE_MC_COLOR_1=$d025
 .label KEYBOARD_DR_PORT_A_COL=$dc00
 .label SPRITE_5_PTR_VAL=$f5
+.label CowLane=$ce1
 .label SPRITE_2_POSITION_Y=$d005
-.label CurWindowBegin=$eb0
 .label SPRITE_1_COLOR=$d028
 .label SPRITE_3_POSITION_Y=$d007
 .label ROAD_POSITION_LEFT=$80
-.label CurWindowEnd=$eb1
-.label Car=$c9c {
-  .label Draw=$cd3 {
+.label Car=$a98 {
+  .label Draw=$b01 {
   }
-  .label CopyCar1=$d5a {
+  .label CopyCar1=$b88 {
   }
-  .label CopyCar2=$d66 {
+  .label CopyCar2=$b94 {
   }
-  .label CopyCar0=$d4e {
+  .label CopyCar0=$b7c {
   }
-  .label Update=$c9c {
+  .label Update=$a98 {
+    .label carSpeedMatchNo=$ad0
+    .label carSpeedMatchYes=$ad1
   }
-  .label CopyCar3=$d72 {
+  .label CopyCar3=$ba0 {
   }
 }
 .label SCREEN_RAM=$400
@@ -50,24 +51,24 @@
 .label COLOR_RAM=$d800
 .label SPRITE_0_PTR=$7f8
 .label SPEED_WINDOW_2_B=$21
-.label Map=$d7e {
-  .label Init=$d7e {
+.label Map=$bac {
+  .label Init=$bac {
   }
 }
-.label MAP=$ec1
+.label MAP=$ced
 .label gameLoop=$84c
 .label SPRITE_1_PTR=$7f9
 .label KEYBOARD_BUFFER_BEGIN=$277
 .label SPRITE_1_POSITION_LEFT_X=$d002
 .label SPEED_WINDOW_2_E=$40
 .label SPRITE_4_POSITION_RIGHT_X_ENABLE=$d014
-.label RoadPariOrDispari=$eb6
-.label MAP_COLORS=$12a9
-.label RoadSpeedArraySize=$ebe
+.label RoadPariOrDispari=$ce2
+.label MAP_COLORS=$10d5
+.label RoadSpeedArraySize=$cea
 .label KEYBOARD_DDR_PORT_A_COL=$dc03
 .label KEYBOARD_DR_PORT_A_ROW=$dc01
 .label SPRITE_0_POSITION_Y=$d001
-.label TempMapColor=$ec0
+.label TempMapColor=$cec
 .label SPRITE_2_PTR_VAL=$f2
 .label Entry=$80e
 .label SPRITE_ENABLE=$d015
@@ -78,83 +79,64 @@
 .label SPRITE_0_PTR_VAL=$f0
 .label SPRITE_1_POSITION_RIGHT_X_ENABLE=$d011
 .label SPRITE_4_POSITION_LEFT_X=$d008
-.label CowPositionY=$eb4
+.label CowPositionY=$cdf
 .label SPRITE_5_POSITION_Y=$d00b
 .label SPRITE_3_COLOR=$d02a
 .label ROAD_PARI=$1
-.label SPRITES=$13a8 {
-  .label SpriteCar3=$1468
-  .label SpriteCar0=$13a8
-  .label SpriteCar2=$1428
-  .label SpriteCar1=$13e8
-  .label SpriteCow0=$14a8
-  .label SpriteCow1=$14e8
-}
-.label Speed=$887 {
-  .label SetWindow2=$a49 {
-  }
-  .label SetWindow3=$a59 {
-  }
-  .label SetWindow4=$a69 {
-  }
-  .label WhatWindow2=$9b0 {
-  }
-  .label SetWindow5=$a79 {
-  }
-  .label SetWindow6=$a89 {
-  }
-  .label SetWindow7=$a99 {
-  }
-  .label WhatWindow=$887 {
-  }
-  .label SetWindow0=$a29 {
-  }
-  .label SetWindow1=$a39 {
-  }
+.label SPRITES=$11d4 {
+  .label SpriteCar3=$1294
+  .label SpriteCar0=$11d4
+  .label SpriteCar2=$1254
+  .label SpriteCar1=$1214
+  .label SpriteCow0=$12d4
+  .label SpriteCow1=$1314
 }
 .label SCREEN_ROW_LENGTH=$28
-.label Road=$ba5 {
-  .label Draw=$bf9 {
+.label Road=$958 {
+  .label Draw=$9ac {
   }
-  .label Update=$ba5 {
-    .label roadSpeedMatchYes=$bde
-  }
-}
-.label Keyboard=$aa9 {
-  .label KeyScan=$aa9 {
+  .label Update=$958 {
+    .label roadSpeedMatchYes=$991
   }
 }
-.label FrameCounter=$eb3
-.label RoadSpeedArray=$eb7
+.label Keyboard=$887 {
+  .label KeyScan=$887 {
+  }
+  .label Reset=$8a0 {
+  }
+}
+.label FrameCounter=$cde
+.label RoadSpeedArray=$ce3
 .label SPRITE_4_PTR_VAL=$f4
 .label SPRITE_3_PTR=$7fb
-.label Cow=$ac2 {
-  .label CopyCow0=$b8d {
+.label Cow=$8ad {
+  .label CopyCow0=$940 {
   }
-  .label CopyCow1=$b99 {
+  .label CopyCow1=$94c {
   }
-  .label Init=$ac2 {
+  .label Init=$8ad {
   }
-  .label Draw=$b4b {
+  .label Draw=$8fe {
   }
-  .label Update=$ac7 {
+  .label Update=$8b2 {
+    .label cowSpeedMatchNo=$8ea
+    .label cowSpeedMatchYes=$8eb
   }
 }
 .label SPRITE_0_POSITION_LEFT_X=$d000
 .label SPRITE_3_POSITION_RIGHT_X_ENABLE=$d013
 .label SPRITE_3_POSITION_LEFT_X=$d006
 .label VIC=$d000
-.label CarLane=$eb5
+.label CarLane=$ce0
 .label SPRITE_5_PTR=$7fd
 .label CHARSET=$3000
 .label SPRITE_4_PTR=$7fc
 .label ROAD_POSITION_RIGHT2=$d0
-.label CurWindow=$eaf
 .label ROAD_DISPARI=$2
 .label CAR_LANE_RIGHT=$2
 .label CAR_SPEED=$20
 .label SPEED_WINDOW_3_B=$80
-.label KeyCapturedArray=$db0
+.label KeyCapturedArray=$bde
 .label SPEED_WINDOW_1_B=$0
 .label WaitRaster=$86b {
 }

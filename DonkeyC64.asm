@@ -142,14 +142,14 @@ Entry: // $080e
 	jsr Cow.Init
 
 gameLoop:
-		jsr WaitRaster		
+		jsr WaitRaster
 		jsr Keyboard.KeyScan
 		//jsr Speed.WhatWindow
 
 		// *** Update *** //
 		jsr Road.Update
 		jsr Cow.Update
-		jsr Car.Update		
+		jsr Car.Update
 
 		// *** Draw *** //
 		jsr Road.Draw
@@ -184,7 +184,7 @@ ClearScreen: {
         rts
 }
 
-#import "./Speed.asm"
+//#import "./Speed.asm"
 #import "./keyboard.asm"
 #import "./cow.asm"
 #import "./road.asm"
@@ -198,12 +198,6 @@ KeyCapturedArray:
 		//  1   2   3   4   5   6   7   8   9  10
 	//.byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 	.fill 255, $00
-CurWindow:
-	.byte $00
-CurWindowBegin:
-	.byte $00
-CurWindowEnd:
-	.byte $00
 FrameKey:
 	.byte $00
 FrameCounter:
@@ -214,6 +208,8 @@ CowPositionY:
 	// .byte CAR_POSITION_RIGHT
 CarLane:
 	.byte CAR_LANE_LEFT
+CowLane:
+	.byte CAR_LANE_LEFT	
 // CarSpeed:
 	// .byte $10
 RoadPariOrDispari:
@@ -273,4 +269,4 @@ SPRITES: {
 
 *=$3000 "CharSet"
 CHARSET:
-	 .import binary "./chars.bin"
+ .import binary "./chars.bin"

@@ -53,7 +53,7 @@ Error - CRT header invalid.
 CART: 'C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition/bin/DonkeyC64.prg' is not a valid CRT file.
 AUTOSTART: Loading PRG file `C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition/bin/DonkeyC64.prg' with direct RAM injection.
 AUTOSTART: Resetting the machine to autostart '*'
-VIC-II: VSP Bug: safe channels are: 157. Emulation of memory corruption is disabled.
+VIC-II: VSP Bug: safe channels are: 13457. Emulation of memory corruption is disabled.
 AUTOSTART: Turning Warp mode on
 AUTOSTART: `C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition/bin/DonkeyC64.prg' recognized as program/p00 file.
 Main CPU: starting at ($FFFC).
@@ -64,59 +64,53 @@ Monitor playback command: al C:d010 .SPRITE_0_POSITION_RIGHT_X_ENABLE
 Monitor playback command: al C:1 .CAR_LANE_LEFT
 Monitor playback command: al C:b8 .ROAD_POSITION_RIGHT
 Monitor playback command: al C:d015 .SPRITE_5_POSITION_RIGHT_X_ENABLE
-Monitor playback command: al C:ac2 .Init__0
-Monitor playback command: al C:d7e .Init__1
-Monitor playback command: al C:ebf .RoadSpeedArrayIndexFound
+Monitor playback command: al C:8ad .Init__0
+Monitor playback command: al C:bac .Init__1
+Monitor playback command: al C:ceb .RoadSpeedArrayIndexFound
 Monitor playback command: al C:280 .KEYBOARD_BUFFER_END
 Monitor playback command: al C:f1 .SPRITE_1_PTR_VAL
-Monitor playback command: al C:a29 .SetWindow0
-Monitor playback command: al C:a39 .SetWindow1
-Monitor playback command: al C:eb2 .FrameKey
-Monitor playback command: al C:a49 .SetWindow2
-Monitor playback command: al C:a59 .SetWindow3
-Monitor playback command: al C:a69 .SetWindow4
-Monitor playback command: al C:a79 .SetWindow5
-Monitor playback command: al C:a89 .SetWindow6
-Monitor playback command: al C:a99 .SetWindow7
+Monitor playback command: al C:cdd .FrameKey
 Monitor playback command: al C:d00a .SPRITE_5_POSITION_LEFT_X
 Monitor playback command: al C:dc00 .KEYBOARD_DR_PORT_A_COL
+Monitor playback command: al C:8eb .cowSpeedMatchYes
+Monitor playback command: al C:ad1 .carSpeedMatchYes
 Monitor playback command: al C:f5 .SPRITE_5_PTR_VAL
 Monitor playback command: al C:d005 .SPRITE_2_POSITION_Y
-Monitor playback command: al C:887 .WhatWindow
 Monitor playback command: al C:d028 .SPRITE_1_COLOR
 Monitor playback command: al C:d007 .SPRITE_3_POSITION_Y
 Monitor playback command: al C:d02b .SPRITE_4_COLOR
 Monitor playback command: al C:d004 .SPRITE_2_POSITION_LEFT_X
+Monitor playback command: al C:ad0 .carSpeedMatchNo
 Monitor playback command: al C:d800 .COLOR_RAM
-Monitor playback command: al C:d7e .Map
-Monitor playback command: al C:ec1 .MAP
+Monitor playback command: al C:bac .Map
+Monitor playback command: al C:ced .MAP
 Monitor playback command: al C:84c .gameLoop
 Monitor playback command: al C:277 .KEYBOARD_BUFFER_BEGIN
 Monitor playback command: al C:d014 .SPRITE_4_POSITION_RIGHT_X_ENABLE
-Monitor playback command: al C:eb6 .RoadPariOrDispari
-Monitor playback command: al C:b4b .Draw__0
-Monitor playback command: al C:bf9 .Draw__1
-Monitor playback command: al C:cd3 .Draw__2
+Monitor playback command: al C:ce2 .RoadPariOrDispari
+Monitor playback command: al C:8fe .Draw__0
+Monitor playback command: al C:9ac .Draw__1
+Monitor playback command: al C:b01 .Draw__2
 Monitor playback command: al C:80b .upstartEnd
 Monitor playback command: al C:dc01 .KEYBOARD_DR_PORT_A_ROW
 Monitor playback command: al C:f2 .SPRITE_2_PTR_VAL
-Monitor playback command: al C:bde .roadSpeedMatchYes
+Monitor playback command: al C:991 .roadSpeedMatchYes
 Monitor playback command: al C:80e .Entry
 Monitor playback command: al C:7fa .SPRITE_2_PTR
 Monitor playback command: al C:d400 .S
 Monitor playback command: al C:d00b .SPRITE_5_POSITION_Y
 Monitor playback command: al C:d02a .SPRITE_3_COLOR
 Monitor playback command: al C:28 .SCREEN_ROW_LENGTH
-Monitor playback command: al C:ba5 .Road
-Monitor playback command: al C:eb3 .FrameCounter
-Monitor playback command: al C:ac2 .Cow
+Monitor playback command: al C:958 .Road
+Monitor playback command: al C:cde .FrameCounter
+Monitor playback command: al C:8ad .Cow
 Monitor playback command: al C:d000 .SPRITE_0_POSITION_LEFT_X
 Monitor playback command: al C:d013 .SPRITE_3_POSITION_RIGHT_X_ENABLE
 Monitor playback command: al C:d006 .SPRITE_3_POSITION_LEFT_X
-Monitor playback command: al C:1468 .SpriteCar3
-Monitor playback command: al C:13a8 .SpriteCar0
-Monitor playback command: al C:1428 .SpriteCar2
-Monitor playback command: al C:13e8 .SpriteCar1
+Monitor playback command: al C:1294 .SpriteCar3
+Monitor playback command: al C:11d4 .SpriteCar0
+Monitor playback command: al C:1254 .SpriteCar2
+Monitor playback command: al C:1214 .SpriteCar1
 Monitor playback command: al C:7fc .SPRITE_4_PTR
 Monitor playback command: al C:d0 .ROAD_POSITION_RIGHT2
 Monitor playback command: al C:2 .ROAD_DISPARI
@@ -126,63 +120,61 @@ Monitor playback command: al C:86b .WaitRaster
 Monitor playback command: al C:d029 .SPRITE_2_COLOR
 Monitor playback command: al C:80 .SPEED_WINDOW_3_E
 Monitor playback command: al C:d009 .SPRITE_4_POSITION_Y
-Monitor playback command: al C:ac7 .Update__0
-Monitor playback command: al C:ba5 .Update__1
-Monitor playback command: al C:c9c .Update__2
-Monitor playback command: al C:b8d .CopyCow0
+Monitor playback command: al C:8b2 .Update__0
+Monitor playback command: al C:958 .Update__1
+Monitor playback command: al C:a98 .Update__2
+Monitor playback command: al C:940 .CopyCow0
 Monitor playback command: al C:d02c .SPRITE_5_COLOR
-Monitor playback command: al C:b99 .CopyCow1
-Monitor playback command: al C:9b0 .WhatWindow2
+Monitor playback command: al C:94c .CopyCow1
+Monitor playback command: al C:8ea .cowSpeedMatchNo
 Monitor playback command: al C:f3 .SPRITE_3_PTR_VAL
 Monitor playback command: al C:d01c .SPRITE_MC_MODE_ENABLE
-Monitor playback command: al C:14a8 .SpriteCow0
-Monitor playback command: al C:14e8 .SpriteCow1
+Monitor playback command: al C:8a0 .Reset
+Monitor playback command: al C:12d4 .SpriteCow0
+Monitor playback command: al C:1314 .SpriteCow1
 Monitor playback command: al C:d003 .SPRITE_1_POSITION_Y
 Monitor playback command: al C:d012 .SPRITE_2_POSITION_RIGHT_X_ENABLE
 Monitor playback command: al C:dc02 .KEYBOARD_DDR_PORT_A_ROW
 Monitor playback command: al C:3c00 .SPRITE_PTR_BASE
 Monitor playback command: al C:d026 .SPRITE_MC_COLOR_2
 Monitor playback command: al C:d025 .SPRITE_MC_COLOR_1
-Monitor playback command: al C:eb0 .CurWindowBegin
+Monitor playback command: al C:ce1 .CowLane
 Monitor playback command: al C:80 .ROAD_POSITION_LEFT
-Monitor playback command: al C:eb1 .CurWindowEnd
-Monitor playback command: al C:c9c .Car
+Monitor playback command: al C:a98 .Car
 Monitor playback command: al C:400 .SCREEN_RAM
-Monitor playback command: al C:d5a .CopyCar1
-Monitor playback command: al C:d66 .CopyCar2
-Monitor playback command: al C:d4e .CopyCar0
+Monitor playback command: al C:b88 .CopyCar1
+Monitor playback command: al C:b94 .CopyCar2
+Monitor playback command: al C:b7c .CopyCar0
 Monitor playback command: al C:7f8 .SPRITE_0_PTR
 Monitor playback command: al C:21 .SPEED_WINDOW_2_B
-Monitor playback command: al C:d72 .CopyCar3
+Monitor playback command: al C:ba0 .CopyCar3
 Monitor playback command: al C:7f9 .SPRITE_1_PTR
-Monitor playback command: al C:aa9 .KeyScan
+Monitor playback command: al C:887 .KeyScan
 Monitor playback command: al C:d002 .SPRITE_1_POSITION_LEFT_X
 Monitor playback command: al C:40 .SPEED_WINDOW_2_E
-Monitor playback command: al C:12a9 .MAP_COLORS
-Monitor playback command: al C:ebe .RoadSpeedArraySize
+Monitor playback command: al C:10d5 .MAP_COLORS
+Monitor playback command: al C:cea .RoadSpeedArraySize
 Monitor playback command: al C:dc03 .KEYBOARD_DDR_PORT_A_COL
 Monitor playback command: al C:d001 .SPRITE_0_POSITION_Y
-Monitor playback command: al C:ec0 .TempMapColor
+Monitor playback command: al C:cec .TempMapColor
 Monitor playback command: al C:d015 .SPRITE_ENABLE
 Monitor playback command: al C:d027 .SPRITE_0_COLOR
 Monitor playback command: al C:f0 .SPRITE_0_PTR_VAL
 Monitor playback command: al C:d011 .SPRITE_1_POSITION_RIGHT_X_ENABLE
 Monitor playback command: al C:d008 .SPRITE_4_POSITION_LEFT_X
-Monitor playback command: al C:eb4 .CowPositionY
+Monitor playback command: al C:cdf .CowPositionY
 Monitor playback command: al C:1 .ROAD_PARI
-Monitor playback command: al C:13a8 .SPRITES
-Monitor playback command: al C:887 .Speed
-Monitor playback command: al C:aa9 .Keyboard
-Monitor playback command: al C:eb7 .RoadSpeedArray
+Monitor playback command: al C:11d4 .SPRITES
+Monitor playback command: al C:887 .Keyboard
+Monitor playback command: al C:ce3 .RoadSpeedArray
 Monitor playback command: al C:f4 .SPRITE_4_PTR_VAL
 Monitor playback command: al C:7fb .SPRITE_3_PTR
 Monitor playback command: al C:d000 .VIC
-Monitor playback command: al C:eb5 .CarLane
+Monitor playback command: al C:ce0 .CarLane
 Monitor playback command: al C:7fd .SPRITE_5_PTR
 Monitor playback command: al C:3000 .CHARSET
-Monitor playback command: al C:eaf .CurWindow
 Monitor playback command: al C:2 .CAR_LANE_RIGHT
-Monitor playback command: al C:db0 .KeyCapturedArray
+Monitor playback command: al C:bde .KeyCapturedArray
 Monitor playback command: al C:0 .SPEED_WINDOW_1_B
 Closed monitor command playback file: C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition/bin/DonkeyC64.vs
 Unit 8: RESET.
@@ -201,4 +193,4 @@ VICE thread initiating shutdown
 VICE thread is exiting
 VICE thread has been joined.
 Writing configuration file `C:\Users\Raffaele Pagano\AppData\Roaming\vice\vice.ini'.
-VIC-II: VSP Bug: safe channels are: 0145. Emulation of memory corruption is disabled.
+VIC-II: VSP Bug: safe channels are: 0367. Emulation of memory corruption is disabled.

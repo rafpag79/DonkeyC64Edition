@@ -20,9 +20,21 @@ Keyboard: {
 
 		// *** Store Array *** //				
 		ldx FrameCounter
-		sta KeyCapturedArray, x	
+		
+		sta KeyCapturedArray, x	   //$0b94
 
 	!exit:
+		rts
+	}
+
+	Reset: {
+		ldx #$00
+	!loop:
+		lda #$00
+		sta KeyCapturedArray, x
+		inx
+		cpx #$ff		
+		bne !loop-		
 		rts
 	}
 

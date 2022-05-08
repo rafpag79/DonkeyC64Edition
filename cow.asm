@@ -6,18 +6,43 @@ Cow: {
 
 	Update: {
 
-		//Speed Delay
-		.for(var i=0;i<16;i++) {
-			// lda #i
-			// sta $0400
-			lda #$10 * i
-			cmp FrameCounter
-			//bne !roadSpeedMatchNo+
-			beq !cowSpeedMatchYes+
-		}	
-		!cowSpeedMatchNo:
+				// *** Speed Match *** //
+	lda #$00
+	cmp FrameCounter
+	beq cowSpeedMatchYes
+	
+	lda #$20
+	cmp FrameCounter
+	beq cowSpeedMatchYes
+	
+	lda #$40
+	cmp FrameCounter
+	beq cowSpeedMatchYes
+	
+	lda #$60
+	cmp FrameCounter
+	beq cowSpeedMatchYes
+
+	lda #$80
+	cmp FrameCounter
+	beq cowSpeedMatchYes
+
+	lda #$a0
+	cmp FrameCounter
+	beq cowSpeedMatchYes
+
+	lda #$c0
+	cmp FrameCounter
+	beq cowSpeedMatchYes
+
+	lda #$e0
+	cmp FrameCounter
+	beq cowSpeedMatchYes
+
+
+	cowSpeedMatchNo:
 			rts		
-		!cowSpeedMatchYes:
+	cowSpeedMatchYes:
 
 			inc CowPositionY
 			lda	CowPositionY
@@ -47,20 +72,20 @@ Cow: {
 
         // Lane
         // *** Position LEFT X *** //
-        lda CarLane
+        lda CowLane
         cmp #CAR_LANE_LEFT
-        beq !drawCarToLaneLeft+
+        beq !drawCowToLaneLeft+
         cmp #CAR_LANE_RIGHT
-        beq !drawCarToLaneRight+
+        beq !drawCowToLaneRight+
 
-    !drawCarToLaneLeft:
+    !drawCowToLaneLeft:
     	lda #ROAD_POSITION_LEFT+$00
         sta SPRITE_4_POSITION_LEFT_X   // x
         lda #ROAD_POSITION_LEFT+$18
         sta SPRITE_5_POSITION_LEFT_X   // x
         jmp !skip+
 
-    !drawCarToLaneRight:
+    !drawCowToLaneRight:
         lda #ROAD_POSITION_RIGHT+$00
         sta SPRITE_4_POSITION_LEFT_X   // x
         lda #ROAD_POSITION_RIGHT+$18

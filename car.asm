@@ -14,27 +14,63 @@ Car: {
 		// beq !window1+
 
 		// *** Speed *** //
-		jsr Speed.WhatWindow2
+		// jsr Speed.WhatWindow2
 
-
-
+		// *** Speed Match *** //
+	lda #$00
+	cmp FrameCounter
+	beq carSpeedMatchYes
 	
-			ldx CurWindowBegin
+	lda #$20
+	cmp FrameCounter
+	beq carSpeedMatchYes
+	
+	lda #$40
+	cmp FrameCounter
+	beq carSpeedMatchYes
+	
+	lda #$60
+	cmp FrameCounter
+	beq carSpeedMatchYes
+
+	lda #$80
+	cmp FrameCounter
+	beq carSpeedMatchYes
+
+	lda #$a0
+	cmp FrameCounter
+	beq carSpeedMatchYes
+
+	lda #$c0
+	cmp FrameCounter
+	beq carSpeedMatchYes
+
+	lda #$e0
+	cmp FrameCounter
+	beq carSpeedMatchYes
+
+carSpeedMatchNo:
+	rts
+
+carSpeedMatchYes:
+	
+			ldx #$00
 		!next:
 		// .break
 			lda KeyCapturedArray, x
 			cmp #%10111111
 			beq !trovato+
 
-			cpx CurWindowBegin		
+			cpx #$ff		
 			beq !exit+
 
 			inx
 			jmp !next-
 		!trovato:
 		// .break
-			lda #$00 //delete key from array
-			sta KeyCapturedArray, x
+			// lda #$00 //delete key from array
+			// sta KeyCapturedArray, x
+			jsr Keyboard.Reset
 			jmp !change+
 		!exit:
 			rts
@@ -55,6 +91,7 @@ Car: {
 			sta CarLane
 			rts
 	}
+
 	Draw: {
 		// *** Sprite: Color *** //
 		lda #$02      // sprite colore
@@ -113,13 +150,13 @@ Car: {
 
     !continue:
         // *** Position Y *** //
-        lda #$3f        
+        lda #$af        
         sta SPRITE_0_POSITION_Y   //$d001=53249  // y
-        lda #$3f
+        lda #$af
         sta SPRITE_1_POSITION_Y   //$d001=53249  // y
-        lda #$3f+$15
+        lda #$af+$15
         sta SPRITE_2_POSITION_Y   //$d001=53249  // y
-        lda #$3f+$15
+        lda #$af+$15
         sta SPRITE_3_POSITION_Y   //$d001=53249  // y
         
         // *** Position RIGHT Y *** //
@@ -129,6 +166,7 @@ Car: {
         
         rts
 	}	
+
 	CopyCar0: {
 		ldx #$40
 		!Loop:
