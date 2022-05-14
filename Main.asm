@@ -1,77 +1,4 @@
-.label SCREEN_RAM = $0400
-.label SCREEN_ROW_LENGTH = $28 //40
-.label COLOR_RAM  = $d800
-.label VIC = $d000 //53248
-.label SPRITE_ENABLE = VIC+21
-.label SPRITE_MC_MODE_ENABLE = VIC+28
-.label SPRITE_MC_COLOR_1 = VIC+37
-.label SPRITE_MC_COLOR_2 = VIC+38
-.label SPRITE_0_PTR = $07f8 //2040
-.label SPRITE_1_PTR = $07f9 //2041
-.label SPRITE_2_PTR = $07fa //2042
-.label SPRITE_3_PTR = $07fb //2043
-.label SPRITE_4_PTR = $07fc //2044
-.label SPRITE_5_PTR = $07fd //2045
-.label SPRITE_0_PTR_VAL = $f0 //240
-.label SPRITE_1_PTR_VAL = $f1 //241
-.label SPRITE_2_PTR_VAL = $f2 //242
-.label SPRITE_3_PTR_VAL = $f3 //243
-.label SPRITE_4_PTR_VAL = $f4 //244
-.label SPRITE_5_PTR_VAL = $f5 //245
-.label SPRITE_PTR_BASE = $3c00 //240
-// *** Color *** //
-.label SPRITE_0_COLOR = VIC+39
-.label SPRITE_1_COLOR = VIC+40
-.label SPRITE_2_COLOR = VIC+41
-.label SPRITE_3_COLOR = VIC+42
-.label SPRITE_4_COLOR = VIC+43
-.label SPRITE_5_COLOR = VIC+44
-// *** Position RIGHT X *** //
-.label SPRITE_0_POSITION_RIGHT_X_ENABLE = VIC+16
-.label SPRITE_1_POSITION_RIGHT_X_ENABLE = VIC+17
-.label SPRITE_2_POSITION_RIGHT_X_ENABLE = VIC+18
-.label SPRITE_3_POSITION_RIGHT_X_ENABLE = VIC+19
-.label SPRITE_4_POSITION_RIGHT_X_ENABLE = VIC+20
-.label SPRITE_5_POSITION_RIGHT_X_ENABLE = VIC+21
-// *** Position LEFT X *** //
-.label SPRITE_0_POSITION_LEFT_X = VIC+0
-.label SPRITE_1_POSITION_LEFT_X = VIC+2
-.label SPRITE_2_POSITION_LEFT_X = VIC+4
-.label SPRITE_3_POSITION_LEFT_X = VIC+6
-.label SPRITE_4_POSITION_LEFT_X = VIC+8
-.label SPRITE_5_POSITION_LEFT_X = VIC+10
-// *** Position Y *** //
-.label SPRITE_0_POSITION_Y = VIC+1
-.label SPRITE_1_POSITION_Y = VIC+3
-.label SPRITE_2_POSITION_Y = VIC+5
-.label SPRITE_3_POSITION_Y = VIC+7
-.label SPRITE_4_POSITION_Y = VIC+9
-.label SPRITE_5_POSITION_Y = VIC+11
-// *** Road *** //
-.label ROAD_PARI = $01
-.label ROAD_DISPARI = $02
-.label ROAD_POSITION_LEFT = $80
-.label ROAD_POSITION_RIGHT = $b8
-.label ROAD_POSITION_RIGHT2 = $b8+$18
-.label CAR_LANE_LEFT = $01
-.label CAR_LANE_RIGHT = $02
-.label CAR_SPEED = $20 //32 decimal
-// *** Keyboard *** //
-.label KEYBOARD_DR_PORT_A_COL = $dc00
-.label KEYBOARD_DR_PORT_A_ROW = $dc01
-.label KEYBOARD_DDR_PORT_A_ROW = $dc02
-.label KEYBOARD_DDR_PORT_A_COL = $dc03
-.label KEYBOARD_BUFFER_BEGIN = $277
-.label KEYBOARD_BUFFER_END = $280
-// *** Window *** //
-.label SPEED_WINDOW_1_B = $00 //0
-.label SPEED_WINDOW_1_E = $20 //32
-.label SPEED_WINDOW_2_B = $21
-.label SPEED_WINDOW_2_E = $40
-.label SPEED_WINDOW_3_B = $80
-.label SPEED_WINDOW_3_E = $80
-// Sound
-.label S = 54272
+#import "./Labels.asm"
 
 // *=$0801
 BasicUpstart2(Entry)
@@ -117,6 +44,9 @@ Entry: // $080e
 
 	cli
 
+	// jsr CharSet.Copy
+	jsr CharSetArcade.Copy
+
 	lda #$0c
 	sta $d020
 
@@ -130,32 +60,50 @@ Entry: // $080e
 	jsr Car.CopyCar1
 	jsr Car.CopyCar2
 	jsr Car.CopyCar3	
-	jsr Cow.CopyCow0
-	jsr Cow.CopyCow1
+	jsr Donkey.CopyCow0
+	jsr Donkey.CopyCow1
 	
-	jsr Map.Init
+	// jsr Map.Draw
 
 	// jsr Sound.Reset
 	// jsr Sound.Init
 
 	// *** Init *** //
-	jsr Cow.Init
+	jsr Donkey.Init
+
+	lda #$01
+	sta GameState
 
 gameLoop:
 		jsr WaitRaster
 		jsr Keyboard.KeyScan
 		//jsr Speed.WhatWindow
 
+		lda GameState
+		// .break
+		cmp #$01
+		beq !GameIntro+
+		cmp #$02
+		beq !GameLevel+
+		jmp continueLoop
+
+!GameIntro:
+	jsr Intro.Update
+	jsr Intro.Draw
+	jmp continueLoop	
+
+!GameLevel:
 		// *** Update *** //
 		jsr Road.Update
-		jsr Cow.Update
+		jsr Donkey.Update
 		jsr Car.Update
 
 		// *** Draw *** //
 		jsr Road.Draw
-		jsr Cow.Draw
+		jsr Donkey.Draw
 		jsr Car.Draw
 
+continueLoop:
 		// jsr Sound.Reset
 		// jsr Sound.Play
 		inc FrameCounter
@@ -172,6 +120,7 @@ WaitRaster: {
 }
 
 ClearScreen: {
+	.break
 		lda #$00
         ldx #$00
     !:
@@ -186,12 +135,18 @@ ClearScreen: {
 
 //#import "./Speed.asm"
 #import "./keyboard.asm"
-#import "./cow.asm"
+#import "./Donkey.asm"
 #import "./road.asm"
 #import "./car.asm"
-#import "./levelZero.asm"
+#import "./Level.asm"
+#import "./Intro.asm"
 // #import "./sound.asm"
+//#import "./charset.asm"
+#import "./CharsetArcade.asm"
 
+
+GameState:
+	.byte $00
 // KeyCapturedCurIndex:
 	// .byte $00
 KeyCapturedArray:
@@ -267,6 +222,6 @@ SPRITES: {
 		.byte $3b,$80,$00,$3b,$80,$00,$3b,$80,$00,$00,$00,$00,$00,$00,$00,$01
 }
 
-*=$3000 "CharSet"
-CHARSET:
- .import binary "./chars.bin"
+// *=$3000 "CharSet"
+// CHARSET:
+ // .import binary "./chars.bin"

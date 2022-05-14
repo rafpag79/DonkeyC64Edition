@@ -1,4 +1,5 @@
-Cow: {
+Donkey: {
+	
 	Init: {
 		lda #$00
 		sta	CowPositionY
