@@ -89,6 +89,10 @@
 .label CAR_LANE_LEFT = $01
 .label CAR_LANE_RIGHT = $02
 .label CAR_SPEED = $20 //32 decimal
+.label ROAD_CHAR = $38 //$39, 57 decimal
+.label LANE_SX_CHAR = $39 //$39, 57 decimal
+.label LANE_DX_CHAR = $3b //$39, 57 decimal
+.label BLANK_CHAR = $3a //$3b, 59 decimal
 // *** Keyboard *** //
 .label KEYBOARD_DR_PORT_A_COL = $dc00
 .label KEYBOARD_DR_PORT_A_ROW = $dc01
@@ -192,7 +196,11 @@
 .label CH_NUM_0 = 27
 .label CH_NUM_1 = 28
 .label CH_NUM_DOT = 37
+.label CH_NUM_2DOT = $2f
 
 
 // Offset
 .label OF1 = 10
+.label OFFSET2= 13
+.label OFFSET3= 3
+.label OFFSET4= 32

@@ -63,13 +63,13 @@ Entry: // $080e
 	jsr Donkey.CopyCow0
 	jsr Donkey.CopyCow1
 	
-	// jsr Map.Draw
-
+	
 	// jsr Sound.Reset
 	// jsr Sound.Init
 
 	// *** Init *** //
 	jsr Donkey.Init
+	jsr Intro.DrawScreen
 
 	lda #$01
 	sta GameState
@@ -81,27 +81,27 @@ gameLoop:
 
 		lda GameState
 		// .break
-		cmp #$01
+		cmp #GAME_STATE_INTRO
 		beq !GameIntro+
-		cmp #$02
+		cmp #GAME_STATE_MENU
 		beq !GameLevel+
 		jmp continueLoop
 
-!GameIntro:
-	jsr Intro.Update
-	jsr Intro.Draw
-	jmp continueLoop	
+!GameIntro:	
+	jsr Intro.Update	
+	jmp continueLoop
 
 !GameLevel:
 		// *** Update *** //
+		// jsr Road.Init
 		jsr Road.Update
-		jsr Donkey.Update
+		// jsr Donkey.Update
 		jsr Car.Update
 
 		// *** Draw *** //
-		jsr Road.Draw
-		jsr Donkey.Draw
-		jsr Car.Draw
+		// jsr Road.Draw
+		// jsr Donkey.Draw
+		// jsr Car.Draw
 
 continueLoop:
 		// jsr Sound.Reset
@@ -120,7 +120,6 @@ WaitRaster: {
 }
 
 ClearScreen: {
-	.break
 		lda #$00
         ldx #$00
     !:
@@ -128,6 +127,12 @@ ClearScreen: {
         sta SCREEN_RAM + $100, x
         sta SCREEN_RAM + $200, x
         sta SCREEN_RAM + $300, x
+
+        sta COLOR_RAM, x
+        sta COLOR_RAM + $100, x
+        sta COLOR_RAM + $200, x
+        sta COLOR_RAM + $300, x
+
         dex
         bne !-
         rts
@@ -136,13 +141,14 @@ ClearScreen: {
 //#import "./Speed.asm"
 #import "./keyboard.asm"
 #import "./Donkey.asm"
-#import "./road.asm"
-#import "./car.asm"
+#import "./Road.asm"
+#import "./Car.asm"
 #import "./Level.asm"
 #import "./Intro.asm"
 // #import "./sound.asm"
 //#import "./charset.asm"
 #import "./CharsetArcade.asm"
+#import "./Text.asm"
 
 
 GameState:
@@ -225,3 +231,10 @@ SPRITES: {
 // *=$3000 "CharSet"
 // CHARSET:
  // .import binary "./chars.bin"
+
+// TxtDonkey:
+// 	//      0      1       2      3     4       5      6
+// 	.byte CHAR_D,CHAR_O,CHAR_N,CHAR_K,CHAR_E,CHAR_Y,CH_NUM_2DOT
+// TxtCar:
+// 	//      0      1       2      3     
+// 	.byte CHAR_C,CHAR_A,CHAR_R,CH_NUM_2DOT

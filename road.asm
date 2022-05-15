@@ -1,44 +1,45 @@
 Road: {
+
 	Update: {
 		// *** Speed *** //	
 		//Search speed
 
-	lda #$00
-	cmp FrameCounter
-	beq roadSpeedMatchYes
-	
-	lda #$20
-	cmp FrameCounter
-	beq roadSpeedMatchYes
-	
-	lda #$40
-	cmp FrameCounter
-	beq roadSpeedMatchYes
-	
-	lda #$60
-	cmp FrameCounter
-	beq roadSpeedMatchYes
-
-	lda #$80
-	cmp FrameCounter
-	beq roadSpeedMatchYes
-
-	lda #$a0
-	cmp FrameCounter
-	beq roadSpeedMatchYes
-
-	lda #$c0
-	cmp FrameCounter
-	beq roadSpeedMatchYes
-
-	lda #$e0
-	cmp FrameCounter
-	beq roadSpeedMatchYes
-
-!exit:
-	rts
+		lda #$00
+		cmp FrameCounter
+		beq roadSpeedMatchYes
 		
-roadSpeedMatchYes:
+		lda #$20
+		cmp FrameCounter
+		beq roadSpeedMatchYes
+		
+		lda #$40
+		cmp FrameCounter
+		beq roadSpeedMatchYes
+		
+		lda #$60
+		cmp FrameCounter
+		beq roadSpeedMatchYes
+
+		lda #$80
+		cmp FrameCounter
+		beq roadSpeedMatchYes
+
+		lda #$a0
+		cmp FrameCounter
+		beq roadSpeedMatchYes
+
+		lda #$c0
+		cmp FrameCounter
+		beq roadSpeedMatchYes
+
+		lda #$e0
+		cmp FrameCounter
+		beq roadSpeedMatchYes
+
+	!exit:
+		rts
+		
+	roadSpeedMatchYes:
 		// *** If Pari o Dispari Then *** //	 
 		lda RoadPariOrDispari 
 		cmp #ROAD_PARI
@@ -52,15 +53,20 @@ roadSpeedMatchYes:
 		
 	!rowPari:
 		lda #ROAD_DISPARI
-		sta RoadPariOrDispari 
+		sta RoadPariOrDispari
+		jsr Road.Draw
 		rts
+
 	!rowDispari:
 		lda #ROAD_PARI
 		sta RoadPariOrDispari 
+		jsr Road.Draw
 		rts
+
 	}
 
 	Draw: {
+		
 		// *** If Pari o Dispari Then Goto *** //
 		// jmp !rowOdd+
 		lda RoadPariOrDispari 
@@ -72,10 +78,9 @@ roadSpeedMatchYes:
 		beq !rowOdd+		
 		rts
 
-	!rowEven:		
-
+	!rowEven:
 		// Pari: Pieno
-		lda #$04	
+		lda #ROAD_CHAR
 		sta $043b //1
 		sta $048b //2 +$50
 		sta $04db //3
@@ -140,7 +145,7 @@ roadSpeedMatchYes:
 		sta $07ab //12
 				
 		// Dispari: Pieno
-		lda #$04
+		lda #ROAD_CHAR
 		sta $0463 //1
 		sta $0463+$50 //2
 		sta $0463+$50+$50 //3
@@ -171,4 +176,7 @@ roadSpeedMatchYes:
 
 		rts	
 	}
+
+	
 }
+

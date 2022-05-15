@@ -7,56 +7,55 @@ Donkey: {
 
 	Update: {
 
-				// *** Speed Match *** //
-	lda #$00
-	cmp FrameCounter
-	beq cowSpeedMatchYes
+		// *** Speed Match *** //
+		lda #$00
+		cmp FrameCounter
+		beq cowSpeedMatchYes
+		
+		lda #$20
+		cmp FrameCounter
+		beq cowSpeedMatchYes
 	
-	lda #$20
-	cmp FrameCounter
-	beq cowSpeedMatchYes
-	
-	lda #$40
-	cmp FrameCounter
-	beq cowSpeedMatchYes
-	
-	lda #$60
-	cmp FrameCounter
-	beq cowSpeedMatchYes
+		lda #$40
+		cmp FrameCounter
+		beq cowSpeedMatchYes
+		
+		lda #$60
+		cmp FrameCounter
+		beq cowSpeedMatchYes
 
-	lda #$80
-	cmp FrameCounter
-	beq cowSpeedMatchYes
+		lda #$80
+		cmp FrameCounter
+		beq cowSpeedMatchYes
 
-	lda #$a0
-	cmp FrameCounter
-	beq cowSpeedMatchYes
+		lda #$a0
+		cmp FrameCounter
+		beq cowSpeedMatchYes
 
-	lda #$c0
-	cmp FrameCounter
-	beq cowSpeedMatchYes
+		lda #$c0
+		cmp FrameCounter
+		beq cowSpeedMatchYes
 
-	lda #$e0
-	cmp FrameCounter
-	beq cowSpeedMatchYes
-
+		lda #$e0
+		cmp FrameCounter
+		beq cowSpeedMatchYes
 
 	cowSpeedMatchNo:
-			rts		
+		rts		
 	cowSpeedMatchYes:
-
-			inc CowPositionY
-			lda	CowPositionY
-			cmp #$25
-			beq !reset+
-			bne !exit+
-		!exit:
-			rts
-		!reset:
-			lda #$00
-			sta	CowPositionY        
-			rts
+		inc CowPositionY
+		lda	CowPositionY
+		cmp #$25
+		beq !reset+
+		bne !exit+
+	!exit:
+		rts
+	!reset:
+		lda #$00
+		sta	CowPositionY        
+		rts
 	}
+
 	Draw: {
 		
 		// *** Sprite: Color *** //

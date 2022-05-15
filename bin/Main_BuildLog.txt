@@ -9,7 +9,7 @@ Memory Map
 ----------
 Default-segment:
   $0801-$080c Basic
-  $080e-$1b65 Basic End
+  $080e-$364f Basic End
 
 Writing Vice symbol file: C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition\bin\Main.vs
 Writing Symbol file: Main.sym

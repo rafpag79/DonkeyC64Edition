@@ -28,7 +28,8 @@ Intro: {
 	//     	rts
 	// }
 
-Update: {
+	Update: {
+
 		// *** Change Lane *** //
 			// ldx FrameCounter
 			// cpx #$00
@@ -45,69 +46,75 @@ Update: {
 		// jsr Speed.WhatWindow2
 
 		// *** Speed Match *** //
-	lda #$00
-	cmp FrameCounter
-	beq introSpeedMatchYes
-	
-	lda #$20
-	cmp FrameCounter
-	beq introSpeedMatchYes
-	
-	lda #$40
-	cmp FrameCounter
-	beq introSpeedMatchYes
-	
-	lda #$60
-	cmp FrameCounter
-	beq introSpeedMatchYes
+		lda #$00
+		cmp FrameCounter
+		beq introSpeedMatchYes
+		
+		lda #$20
+		cmp FrameCounter
+		beq introSpeedMatchYes
+		
+		lda #$40
+		cmp FrameCounter
+		beq introSpeedMatchYes
+		
+		lda #$60
+		cmp FrameCounter
+		beq introSpeedMatchYes
 
-	lda #$80
-	cmp FrameCounter
-	beq introSpeedMatchYes
+		lda #$80
+		cmp FrameCounter
+		beq introSpeedMatchYes
 
-	lda #$a0
-	cmp FrameCounter
-	beq introSpeedMatchYes
+		lda #$a0
+		cmp FrameCounter
+		beq introSpeedMatchYes
 
-	lda #$c0
-	cmp FrameCounter
-	beq introSpeedMatchYes
+		lda #$c0
+		cmp FrameCounter
+		beq introSpeedMatchYes
 
-	lda #$e0
-	cmp FrameCounter
-	beq introSpeedMatchYes
+		lda #$e0
+		cmp FrameCounter
+		beq introSpeedMatchYes
 
-introSpeedMatchNo:
-	rts
+	introSpeedMatchNo:
+		//jsr Intro.Draw
+		rts
 
-introSpeedMatchYes:
-	
-			ldx #$00
-		!next:
+	introSpeedMatchYes:	
+		ldx #$00
+	!next:
 		// .break
-			lda KeyCapturedArray, x
-			cmp #%10111111
-			beq !trovato+
+		lda KeyCapturedArray, x
+		cmp #%10111111
+		beq !trovato+
 
-			cpx #$ff		
-			beq !exit+
+		cpx #$ff		
+		beq !exit+
 
-			inx
-			jmp !next-
-		!trovato:
-			jsr Keyboard.Reset
-			//jsr ClearScreen
-			jmp !change+
-		!exit:
-			rts
+		inx
+		jmp !next-
 
-		!change:
-			lda #$02
-			sta GameState
-			rts		
+	!trovato:
+		// .break
+		jsr Keyboard.Reset
+		jsr ClearScreen
+		jsr Level.Init2
+		//Change State
+		lda #$02
+		sta GameState					
+
+	!exit:
+		rts
+
+		// !change:
+			// lda #$02
+			// sta GameState
+			// rts		
 	}
 
-	Draw: {		
+	DrawScreen: {		
 		
 		// Donkey		
 		lda #CHAR_D
@@ -202,7 +209,6 @@ introSpeedMatchYes:
 			lda #COLOR_YELLOW
 			sta COLOR_RAM_ROW5_END+[y*40]-6
 		}
-
 
 		// Version 1.0		
 		lda #CHAR_V
@@ -386,6 +392,6 @@ introSpeedMatchYes:
 }
 
 Titolo:
-.text "Hello World"
+	.text "Hello World"
 Press:
-.text "press space key to play"
+	.text "press space key to play"

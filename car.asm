@@ -1,6 +1,8 @@
-Car: {
+Car: 
+{
 	
-	Update: {
+	Update: 
+	{
 		// *** Change Lane *** //
 			// ldx FrameCounter
 			// cpx #$00
@@ -17,42 +19,42 @@ Car: {
 		// jsr Speed.WhatWindow2
 
 		// *** Speed Match *** //
-	lda #$00
-	cmp FrameCounter
-	beq carSpeedMatchYes
-	
-	lda #$20
-	cmp FrameCounter
-	beq carSpeedMatchYes
-	
-	lda #$40
-	cmp FrameCounter
-	beq carSpeedMatchYes
-	
-	lda #$60
-	cmp FrameCounter
-	beq carSpeedMatchYes
+		lda #$00
+		cmp FrameCounter
+		beq carSpeedMatchYes
+		
+		lda #$20
+		cmp FrameCounter
+		beq carSpeedMatchYes
+		
+		lda #$40
+		cmp FrameCounter
+		beq carSpeedMatchYes
+		
+		lda #$60
+		cmp FrameCounter
+		beq carSpeedMatchYes
 
-	lda #$80
-	cmp FrameCounter
-	beq carSpeedMatchYes
+		lda #$80
+		cmp FrameCounter
+		beq carSpeedMatchYes
 
-	lda #$a0
-	cmp FrameCounter
-	beq carSpeedMatchYes
+		lda #$a0
+		cmp FrameCounter
+		beq carSpeedMatchYes
 
-	lda #$c0
-	cmp FrameCounter
-	beq carSpeedMatchYes
+		lda #$c0
+		cmp FrameCounter
+		beq carSpeedMatchYes
 
-	lda #$e0
-	cmp FrameCounter
-	beq carSpeedMatchYes
+		lda #$e0
+		cmp FrameCounter
+		beq carSpeedMatchYes
 
-carSpeedMatchNo:
-	rts
+	carSpeedMatchNo:
+		rts
 
-carSpeedMatchYes:
+	carSpeedMatchYes:
 	
 			ldx #$00
 		!next:
@@ -85,14 +87,17 @@ carSpeedMatchYes:
 		!changeLaneToRight:
 			lda #CAR_LANE_RIGHT
 			sta CarLane
+			jsr Car.Draw
 			rts
 		!changeLaneToLeft:
 			lda #CAR_LANE_LEFT
 			sta CarLane
+			jsr Car.Draw
 			rts
 	}
 
-	Draw: {
+	Draw: 
+	{
 		// *** Sprite: Color *** //
 		lda #$02      // sprite colore
         sta SPRITE_0_COLOR   //$d027  //53287-53248=39
@@ -176,6 +181,7 @@ carSpeedMatchYes:
 			bne !Loop-
 		rts
 	}
+
 	CopyCar1: {
 		ldx #$40
 		!Loop:
@@ -185,6 +191,7 @@ carSpeedMatchYes:
 			bne !Loop-
 		rts
 	}
+
 	CopyCar2: {
 		ldx #$40
 		!Loop:
@@ -194,6 +201,7 @@ carSpeedMatchYes:
 			bne !Loop-
 		rts
 	}
+
 	CopyCar3: {
 		ldx #$40
 		!Loop:
@@ -203,5 +211,6 @@ carSpeedMatchYes:
 			bne !Loop-
 		rts
 	}
+
 }
 
