@@ -1,9 +1,0 @@
-GameState: {
-
-	SetMenu: {
-		
-	    	rts
-	}
-
-	
-}

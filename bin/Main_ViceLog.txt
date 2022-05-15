@@ -55,7 +55,7 @@ Error - CRT header invalid.
 CART: 'C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition/bin/Main.prg' is not a valid CRT file.
 AUTOSTART: Loading PRG file `C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition/bin/Main.prg' with direct RAM injection.
 AUTOSTART: Resetting the machine to autostart '*'
-VIC-II: VSP Bug: safe channels are: 01357. Emulation of memory corruption is disabled.
+VIC-II: VSP Bug: safe channels are: 34567. Emulation of memory corruption is disabled.
 AUTOSTART: Turning Warp mode on
 AUTOSTART: `C:\GAME_DEV\C64\Gioco Donkey Bas\Workspace\DonkeyC64Edition/bin/Main.prg' recognized as program/p00 file.
 Main CPU: starting at ($FFFC).
@@ -325,8 +325,9 @@ Initiating render thread 0 shutdown
 Joining render thread 0 ...
 Render thread shutdown
 Joined render thread 0.
+Ignoring new render job as render thread 0 has shut down
 VICE thread initiating shutdown
 VICE thread is exiting
 VICE thread has been joined.
 Writing configuration file `C:\Users\Raffaele Pagano\AppData\Roaming\vice\vice.ini'.
-VIC-II: VSP Bug: safe channels are: 2345. Emulation of memory corruption is disabled.
+VIC-II: VSP Bug: safe channels are: 1257. Emulation of memory corruption is disabled.
